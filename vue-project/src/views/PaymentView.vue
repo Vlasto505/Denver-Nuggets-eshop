@@ -60,17 +60,29 @@
     </div>
 
     <!-- PAY BUTTON -->
-    <button
-      class="pay-btn"
-      :disabled="!method || loading"
-      @click="pay"
-    >
-      {{ loading ? 'Processing...' : `Pay ${cartStore.totalPrice.toFixed(2)} €` }}
-    </button>
+    <v-btn
+        color="primary"
+        variant="elevated"
+        size="large"
+        block
+        :loading="loading"
+        :disabled="!method"
+        @click="pay"
+        >
+        Pay {{ cartStore.totalPrice.toFixed(2) }} €
+    </v-btn>
 
-    <p v-if="success" class="success">
-      ✅ Payment successful! Thank you for your order.
-    </p>
+
+
+    <v-alert
+        v-if="success"
+        type="success"
+        variant="tonal"
+        class="mt-4"
+        >
+        Payment successful! Thank you for your order.
+    </v-alert>
+
   </div>
 </template>
 
@@ -179,34 +191,5 @@ export default {
 .row {
   display: flex;
   gap: 12px;
-}
-
-.pay-btn {
-  width: 100%;
-  padding: 14px;
-  background: #0e2240;
-  color: white;
-  border: none;
-  border-radius: 999px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.pay-btn:hover:not(:disabled) {
-  background: #fec524;
-  color: #0e2240;
-}
-
-.pay-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.success {
-  margin-top: 20px;
-  color: green;
-  font-weight: bold;
-  text-align: center;
 }
 </style>

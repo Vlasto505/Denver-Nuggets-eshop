@@ -1,57 +1,87 @@
 <template>
   <nav class="navbar">
-    <h1 class="logo">Denver Nuggets Store</h1>
+    <img src="/images/products/logo.png" alt="Nuggets Store Logo" class="logo" />
 
     <ul class="nav-links">
       <li>
-        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/" exact-active-class="active">Home</RouterLink>
       </li>
+
       <li>
-        <RouterLink to="/products">Products</RouterLink>
+        <RouterLink to="/products" active-class="active">Products</RouterLink>
       </li>
-      <li>
-        <RouterLink to="/cart">Cart</RouterLink>
+
+      <li class="cart-link">
+        <RouterLink to="/cart" active-class="active">
+          Cart🛒
+          <span
+            v-if="cartStore.totalItems > 0"
+            class="cart-badge"
+          >
+            {{ cartStore.totalItems }}
+          </span>
+        </RouterLink>
       </li>
+
       <li>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/about" active-class="active">About</RouterLink>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import { useCartStore } from '@/stores/cart'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  setup() {
+    const cartStore = useCartStore()
+    return { cartStore }
+  }
 }
 </script>
 
 <style scoped>
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background-color: #0e2240; /* Nuggets blue */
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: #0e2240;
   color: white;
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: bold;
+  height: 50px;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 16px;
+  gap: 24px;
+  list-style: none;
 }
 
-.nav-links a {
+.nav-links li a {
   color: white;
   text-decoration: none;
 }
 
-.nav-links a.router-link-active {
-  text-decoration: underline;
+.nav-links li a.router-link-active {
+  border-bottom: 2px solid #fec524;
+}
+
+/* 🔴 CART BADGE */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -14px;
+  background: #e63946;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 999px;
 }
 </style>
+

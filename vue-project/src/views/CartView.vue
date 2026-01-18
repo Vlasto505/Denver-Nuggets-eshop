@@ -1,9 +1,9 @@
 <template>
   <div class="cart-page">
-    <h2>Your cart 🛒</h2>
+    <h2>Your cart 🛍️</h2>
 
     <p v-if="cartStore.cart.length === 0" class="empty">
-      The cart is currently empty 🛒
+      The cart is currently empty 🛍️
     </p>
 
     <ul v-else class="cart-list">
@@ -19,8 +19,11 @@
     <div v-if="cartStore.cart.length" class="cart-footer">
       <h3>Spolu: {{ cartStore.totalPrice.toFixed(2) }} €</h3>
       <BaseButton class="clear-btn" @click="clearCart">
-        Vyprázdni košík
+        Empty cart
       </BaseButton>
+      <RouterLink to="/payment" class="btn">
+        <BaseButton>Proceed to Payment</BaseButton>
+      </RouterLink>
     </div>
   </div>
 </template>

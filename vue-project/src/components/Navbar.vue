@@ -1,7 +1,12 @@
 <template>
-  <nav class="navbar">
-    <img src="/images/products/logo.png" alt="Nuggets Store Logo" class="logo" />
+  <nav class="navbar" :class="{ scrolled }">
+    <!-- LEFT -->
+    <RouterLink to="/" class="brand">
+      <img src="/images/products/logo.png" alt="Nuggets Logo" />
+      <span>Nuggets Store</span>
+    </RouterLink>
 
+    <!-- RIGHT -->
     <ul class="nav-links">
       <li>
         <RouterLink to="/" exact-active-class="active">Home</RouterLink>
@@ -13,11 +18,8 @@
 
       <li class="cart-link">
         <RouterLink to="/cart" active-class="active">
-          Cart🛒
-          <span
-            v-if="cartStore.totalItems > 0"
-            class="cart-badge"
-          >
+          🛍️ Cart
+          <span v-if="cartStore.totalItems > 0" class="cart-badge">
             {{ cartStore.totalItems }}
           </span>
         </RouterLink>
@@ -35,53 +37,113 @@ import { useCartStore } from '@/stores/cart'
 
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      scrolled: false
+    }
+  },
   setup() {
     const cartStore = useCartStore()
     return { cartStore }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY > 40
+    }
   }
 }
 </script>
 
+
 <style scoped>
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0e2240;
+  padding: 22px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* shrink */
+.navbar.scrolled {
+  padding: 12px 40px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* BRAND */
+.brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px 32px;
-  background: #0e2240;
+  gap: 12px;
   color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 22px;
 }
 
-.logo {
-  height: 50px;
+.brand img {
+  height: 42px;
+  transition: transform 0.3s ease;
 }
 
+.navbar.scrolled .brand img {
+  transform: scale(0.9);
+}
+
+/* LINKS */
 .nav-links {
   display: flex;
-  gap: 24px;
+  gap: 14px;
   list-style: none;
 }
 
-.nav-links li a {
+.nav-links a {
+  position: relative;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
   color: white;
   text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
 }
 
-.nav-links li a.router-link-active {
-  border-bottom: 2px solid #fec524;
+/* hover */
+.nav-links a:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
 }
 
-/* 🔴 CART BADGE */
+/* active */
+.nav-links a.active {
+  background: #fec524;
+  color: #0e2240;
+}
+
+/* CART */
+.cart-link {
+  position: relative;
+}
+
 .cart-badge {
   position: absolute;
-  top: -8px;
-  right: -14px;
+  top: -6px;
+  right: -10px;
   background: #e63946;
   color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
+  font-size: 11px;
+  padding: 3px 7px;
   border-radius: 999px;
 }
-</style>
 
+</style>

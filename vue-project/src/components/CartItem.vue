@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <BaseButton class="remove-btn" @click="remove">❌</BaseButton>
+    <BaseButton class="remove-btn" @click="remove">✖</BaseButton>
   </li>
 </template>
 
@@ -92,7 +92,7 @@ export default {
 }
 
 .remove-btn {
-  background: #e53935;
+  background: s#e53935;
   color: white;
   padding: 8px 12px;
   border-radius: 999px;

@@ -28,6 +28,7 @@
       <li>
         <RouterLink to="/about" active-class="active">About</RouterLink>
       </li>
+      
     </ul>
   </nav>
 </template>

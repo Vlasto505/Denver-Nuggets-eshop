@@ -10,13 +10,11 @@ export const useCartStore = defineStore('cart', {
       const item = this.cart.find(p => p.id === product.id)
 
       if (!item) {
-        // Nový produkt začne na 1
         this.cart.push({
           ...product,
           quantity: 1
         })
       } else {
-        // Ak už je v košíku, zvýš quantity o 1
         item.quantity++
       }
       this.saveCart()

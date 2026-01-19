@@ -1,7 +1,6 @@
 <template>
 
   <div v-if="product" class="product-detail-wrapper">
-    <!-- BACK BUTTON -->
     <button class="back-button" @click="goBack">
       ← Back to products
     </button>

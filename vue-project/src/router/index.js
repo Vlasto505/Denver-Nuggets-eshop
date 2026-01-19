@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
 import ProductsView from '@/views/ProductsView.vue'
@@ -10,9 +10,9 @@ import PaymentView from '@/views/PaymentView.vue'
 import FAQView from '@/views/FAQView.vue'
 
 const router = createRouter({
-  history: createWebHistory('/Denver-Nuggets-eshop/'),
+  history: createWebHashHistory(),
   routes: [
-    { path: '/', redirect: '/products' },
+    { path: '/', component: HomeView },
     { path: '/products', component: ProductsView },
     { path: '/product/:id', component: ProductDetailView },
     { path: '/cart', component: CartView },

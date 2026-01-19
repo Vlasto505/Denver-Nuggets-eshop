@@ -42,21 +42,21 @@
     <RouterLink
       to="/product/3"
       class="preview-card"
-      style="background-image: url('/images/products/jokic_milehigh.jpg')"
+      style="background-image: url('images/products/jokic_milehigh.jpg')"
     >
     </RouterLink>
 
     <RouterLink
       to="/product/10"
       class="preview-card"
-      style="background-image: url('/images/products/cap_blue.jpg')"
+      style="background-image: url('images/products/cap_blue.jpg')"
     >
     </RouterLink>
 
     <RouterLink
       to="/product/14"
       class="preview-card"
-      style="background-image: url('/images/products/ball_grafiti.jpg')"
+      style="background-image: url('images/products/ball_grafiti.jpg')"
     >
     </RouterLink>
 
